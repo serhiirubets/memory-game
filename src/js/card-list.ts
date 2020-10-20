@@ -43,7 +43,7 @@ export class CardList {
     const image = new Image(width, height);
     const index = getRandomInteger(0, urls.length - 1);
     const url = urls[index];
-    const card = new Card(this.ctx, x, y, width, height);
+    const card = new Card(this.ctx, x, y, width, height, image);
 
     this.cards.push(card);
 
@@ -51,7 +51,7 @@ export class CardList {
     image.src = url;
 
     image.addEventListener('load', () => {
-      card.drawImage(image, x, y);
+      card.render();
     });
   }
 
@@ -65,7 +65,7 @@ export class CardList {
     this.cards.forEach((card: Card) => {
       if (y > card.y && y < card.y + card.height
         && x > card.x && x < card.x + card.width) {
-        if (this.activeCardCount > 2) {
+        if (this.activeCardCount >= 2) {
           this.activeCardCount = 0;
           this.closeActiveCards()
         }
