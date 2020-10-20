@@ -8,13 +8,16 @@ const mainUrl = 'assets/img';
 
 export class CardList {
   imageUrls: string[] = [];
+  cards: Card[] = [];
+  activeCardCount = 0;
 
-  constructor(private ctx: CanvasRenderingContext2D, private cardAmount: number) {
+  constructor(private canvas: HTMLCanvasElement, private ctx: CanvasRenderingContext2D, private cardAmount: number) {
     this.init();
   }
 
   private init() {
     this.generateImageUrls();
+    this.addListeners();
   }
 
   private generateImageUrls() {
@@ -29,19 +32,56 @@ export class CardList {
     const urls = [...this.imageUrls];
     for (let i = 0; i < this.cardAmount; i++) {
       for (let j = 0; j < this.cardAmount; j++) {
-        const card = new Card(this.ctx);
-        const x = i * width + i * gap;
-        const y = j * height + j * gap;
-        // card.render(x, y, width, height);
-        const image = new Image(width, height);
-        const index = getRandomInteger(0, urls.length - 1);
-        const url = urls[index];
-        urls.splice(index, 1);
-        image.src = url;
-        image.addEventListener('load', () => {
-          card.drawImage(image, x, y);
-        });
+        this.renderCard(urls, i, j);
       }
     }
+  }
+
+  private renderCard(urls: string[], i: number, j: number) {
+    const x = i * width + i * gap;
+    const y = j * height + j * gap;
+    const image = new Image(width, height);
+    const index = getRandomInteger(0, urls.length - 1);
+    const url = urls[index];
+    const card = new Card(this.ctx, x, y, width, height);
+
+    this.cards.push(card);
+
+    urls.splice(index, 1);
+    image.src = url;
+
+    image.addEventListener('load', () => {
+      card.drawImage(image, x, y);
+    });
+  }
+
+  public onClick(e: MouseEvent) {
+    const canvas = this.canvas;
+    const elemLeft = canvas.offsetLeft + canvas.clientLeft;
+    const elemTop = canvas.offsetTop + canvas.clientTop;
+    const x = e.pageX - elemLeft;
+    const y = e.pageY - elemTop;
+
+    this.cards.forEach((card: Card) => {
+      if (y > card.y && y < card.y + card.height
+        && x > card.x && x < card.x + card.width) {
+        if (this.activeCardCount > 2) {
+          this.activeCardCount = 0;
+          this.closeActiveCards()
+        }
+        card.show();
+        this.activeCardCount += 1;
+      }
+    });
+  }
+
+  private addListeners() {
+    this.canvas.addEventListener('click', (e) => {
+      this.onClick(e);
+    })
+  }
+
+  private closeActiveCards() {
+    this.cards.forEach(card => card.close());
   }
 }

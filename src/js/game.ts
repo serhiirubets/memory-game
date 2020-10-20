@@ -12,7 +12,7 @@ export class Game {
   }
 
   public start() {
-    const cardList = new CardList(this.ctx, this.cardAmount);
+    const cardList = new CardList(this.canvas, this.ctx, this.cardAmount);
     cardList.render();
   }
 }

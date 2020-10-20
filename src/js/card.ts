@@ -1,7 +1,13 @@
 export class Card {
   opened: boolean = false;
 
-  constructor(private ctx: CanvasRenderingContext2D) {}
+  constructor(
+    private ctx: CanvasRenderingContext2D,
+    public x: number,
+    public y: number,
+    public height: number,
+    public width: number,
+  ) {}
 
   public show() {
     this.opened = true;
@@ -11,8 +17,8 @@ export class Card {
     this.opened = false;
   }
 
-  public render(x: number, y: number, width: number, height: number) {
-    this.ctx.fillRect(x, y, width, height);
+  public render() {
+    this.ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 
   public drawImage(image: HTMLImageElement, x: number, y: number) {
