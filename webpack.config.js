@@ -56,7 +56,8 @@ module.exports = {
           from: 'src/assets/**/*',
           to: './assets',
           transformPath: (targetPath) => {
-            return targetPath.replace('src/assets', '');
+            const replaceText = targetPath.includes('src/assets') ? 'src/assets' : 'src\\assets';
+            return targetPath.replace(replaceText, '');
           },
         },
       ],
