@@ -1,14 +1,23 @@
+const gap = 50;
+
 export class Card {
   opened: boolean = false;
+  x: number;
+  y: number;
+  readonly id: string;
 
   constructor(
     private ctx: CanvasRenderingContext2D,
-    public x: number,
-    public y: number,
+    public rowNumber: number,
+    public colNumber: number,
     public height: number,
     public width: number,
     public image: HTMLImageElement,
-  ) {}
+  ) {
+    this.x = rowNumber * width + rowNumber * gap;
+    this.y = colNumber * height + colNumber * gap;
+    this.id = `${rowNumber}-${colNumber}`;
+  }
 
   public show() {
     this.opened = true;
@@ -17,10 +26,11 @@ export class Card {
 
   public close() {
     this.opened = false;
+    this.ctx.clearRect(this.x, this.y, this.width, this.height);
     this.render();
   }
 
-  public render() {
+  public render = () => {
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
   }
 
