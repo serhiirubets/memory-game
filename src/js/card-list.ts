@@ -1,5 +1,5 @@
 import { Card } from './card';
-import {getRandomInteger} from './helpers';
+import { getRandomInteger } from './helpers';
 
 const width = 200;
 const height = 200;
@@ -17,7 +17,7 @@ export class CardList {
     this.init();
   }
 
-  public render() {
+  public render(): void {
     const urls = [...this.imageUrls];
     for (let i = 0; i < this.cardAmount; i++) {
       for (let j = 0; j < this.cardAmount; j++) {
@@ -26,7 +26,7 @@ export class CardList {
     }
   }
 
-  public onClick = (e: MouseEvent) => {
+  public onClick = (e: MouseEvent): void => {
     const canvas = this.canvas;
     const elemLeft = canvas.offsetLeft + canvas.clientLeft;
     const elemTop = canvas.offsetTop + canvas.clientTop;
@@ -34,8 +34,7 @@ export class CardList {
     const y = e.pageY - elemTop;
 
     this.cards.forEach((card: Card) => {
-      if (y > card.y && y < card.y + card.height
-        && x > card.x && x < card.x + card.width) {
+      if (y > card.y && y < card.y + card.height && x > card.x && x < card.x + card.width) {
         if (this.winnerCardIds.includes(card.id) || this.prevActiveCard?.id === card.id) {
           return;
         }
@@ -48,7 +47,7 @@ export class CardList {
         card.show();
       }
     });
-  }
+  };
 
   private init() {
     this.generateImageUrls();

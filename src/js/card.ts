@@ -1,7 +1,7 @@
 const gap = 50;
 
 export class Card {
-  opened: boolean = false;
+  opened = false;
   x: number;
   y: number;
   readonly id: string;
@@ -21,7 +21,7 @@ export class Card {
 
   public show() {
     this.opened = true;
-    this.drawImage()
+    this.drawImage();
   }
 
   public close() {
@@ -32,10 +32,10 @@ export class Card {
 
   public render = () => {
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
-  }
+  };
 
   public drawImage() {
     // this.ctx.setTransform(1,0,0,-1,0, 200)
-    this.ctx.drawImage(this.image, this.x, this.y)
+    this.ctx.drawImage(this.image, this.x, this.y);
   }
- }
+}
