@@ -43,13 +43,14 @@ export class CardList {
           this.closeActiveCards();
           this.activeCardCount = 1;
         }
-        this.compare(card);
         card.show();
+        this.compare(card);
       }
     });
   };
 
   private init() {
+    this.ctx.fillStyle = '#71cdea';
     this.generateImageUrls();
     this.addListeners();
   }
@@ -109,7 +110,7 @@ export class CardList {
     this.winnerCardIds.push(this.prevActiveCard?.id as string, this.currentActiveCard?.id as string);
     this.resetActiveCardsState();
 
-    if (this.winnerCardIds.length === this.cardAmount * 2) {
+    if (this.winnerCardIds.length === this.cardAmount ** 2) {
       this.gameOver();
     }
   }

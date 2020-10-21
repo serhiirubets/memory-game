@@ -35,7 +35,6 @@ export class Card {
   };
 
   public drawImage() {
-    // this.ctx.setTransform(1,0,0,-1,0, 200)
     this.ctx.drawImage(this.image, this.x, this.y);
   }
 }
