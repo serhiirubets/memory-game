@@ -5,8 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack-dev-server --mode=development",
-    "build": "webpack",
-    "build:prod": "webpack --config webpack.config.prod.js",
+    "build": "webpack --config webpack.config.prod.js",
     "lint": "npm run ts:lint && npm run eslint",
     "eslint": "eslint 'src/**/*.{js,ts}' --quiet --fix",
     "ts:lint": "tsc --project ./tsconfig.json"
