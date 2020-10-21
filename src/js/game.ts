@@ -7,11 +7,11 @@ export class Game {
     this.preInit();
   }
 
-  private preInit() {
+  private preInit(): void {
     this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
   }
 
-  public start() {
+  public start(): void {
     const cardList = new CardList(this.canvas, this.ctx, this.cardAmount);
     cardList.render();
   }

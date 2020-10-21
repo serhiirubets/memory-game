@@ -58,8 +58,8 @@ export class CardList {
   private generateImageUrls() {
     const amount = this.cardAmount * 2;
     for (let i = 1; i <= amount; i++) {
-      this.imageUrls.push(`${mainUrl}/${i}.jpg`);
-      this.imageUrls.push(`${mainUrl}/${i}.jpg`);
+      const url = `${mainUrl}/${i}.jpg`;
+      this.imageUrls.push(url, url);
     }
   }
 
@@ -115,7 +115,7 @@ export class CardList {
     }
   }
 
-  private gameOver() {
+  private gameOver(): void {
     alert('Congratulation, you won');
   }
 }

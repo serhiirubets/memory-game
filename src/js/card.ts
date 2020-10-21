@@ -19,22 +19,22 @@ export class Card {
     this.id = `${rowNumber}-${colNumber}`;
   }
 
-  public show() {
+  public show(): void {
     this.opened = true;
     this.drawImage();
   }
 
-  public close() {
+  public close(): void {
     this.opened = false;
     this.ctx.clearRect(this.x, this.y, this.width, this.height);
     this.render();
   }
 
-  public render = () => {
+  public render = (): void => {
     this.ctx.fillRect(this.x, this.y, this.width, this.height);
   };
 
-  public drawImage() {
+  public drawImage(): void {
     this.ctx.drawImage(this.image, this.x, this.y);
   }
 }
